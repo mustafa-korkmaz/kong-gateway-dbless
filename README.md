@@ -13,6 +13,12 @@ Detailed version for step by step installation in Turkish is [here](https://must
 `$ docker network create api_gateway`
 ### 2. Start services
 `$ docker-compose up`
+### 3. Start browsing your websites
+```
+$ curl --location 'http://localhost:8000/nginx'
+
+$ curl --location 'http://localhost:8000/httpd'
+```
 
 ## Service dependencies
 ![service dependency graph](https://user-images.githubusercontent.com/5656640/189125557-c576c222-9689-43a9-8ac4-4f634e78d069.png)
@@ -44,7 +50,7 @@ $ curl -k -X POST https://localhost:8443/nginx_service/oauth2/token
 
 ### 2. Pass claimed token as an authorization header value
 ```
-curl --location 'http://localhost:8000/nginx' \
+$ curl --location 'http://localhost:8000/nginx' \
 --header 'Authorization: Bearer nRd9TONdinHN3uAp4zYjA7rPXzlygJCQ'
 
 <!DOCTYPE html><html>..Welcome to nginx!</h1>..</html>
