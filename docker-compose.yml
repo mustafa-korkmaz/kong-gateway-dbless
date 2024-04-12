@@ -28,7 +28,7 @@ services:
       - kong_db:/var/lib/postgresql
   kong_db_migration:
     container_name: kong_db_migration
-    image: kong/kong-gateway:3.0.0.0-alpine
+    image: kong/kong-gateway:3.6.1.2
     command: [ "kong", "migrations", "bootstrap" ]
     depends_on:
       kong_db:
@@ -44,7 +44,7 @@ services:
     depends_on:
       kong_db_migration:
         condition: service_completed_successfully
-    image: kong/kong-gateway:3.0.0.0-alpine
+    image: kong/kong-gateway:3.6.1.2
     ports:
       - "8000:8000"
       - "8443:8443"
@@ -83,6 +83,5 @@ services:
 volumes:
   kong_db: null
 networks:
-  default:
-    external:
-      name: api_gateway
+    default:
+      name: api_gateway        

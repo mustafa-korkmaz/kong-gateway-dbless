@@ -1,21 +1,49 @@
-_format_version: "1.1"
-
+_format_version: "3.0"
+_workspace: default
 services:
- - host: httpd_website
-   name: httpd_website_service
-   port: 80
-   protocol: http
-   routes:
-   - name: httpd_website_route
-     paths:
-     - /httpd
-     strip_path: true
- - host: nginx_website
-   name: nginx_website_service
-   port: 80
-   protocol: http
-   routes:
-   - name: nginx_website_route
-     paths:
-     - /nginx
-     strip_path: true
+- connect_timeout: 60000
+  enabled: true
+  host: httpd_website
+  name: httpd_website_service
+  port: 80
+  protocol: http
+  read_timeout: 60000
+  retries: 5
+  routes:
+  - https_redirect_status_code: 426
+    name: httpd_website_route
+    path_handling: v0
+    paths:
+    - /httpd
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  write_timeout: 60000
+- connect_timeout: 60000
+  enabled: true
+  host: nginx_website
+  name: nginx_website_service
+  port: 80
+  protocol: http
+  read_timeout: 60000
+  retries: 5
+  routes:
+  - https_redirect_status_code: 426
+    name: nginx_website_route
+    path_handling: v0
+    paths:
+    - /nginx
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  write_timeout: 60000
